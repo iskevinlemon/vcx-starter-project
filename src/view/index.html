@@ -5,8 +5,28 @@
     Modify <code>src/view/index.html</code> to edit this page.
 </p>
 
-<h1 style="font-family: Arial, Helvetica, sans-serif;" v-bind="count"></h1>
-<button type="button" role="button" v-click="addCount()">+ Add count</button>
+<h1>{{count}}</h1>
+<div 
+    class="error"
+    v-if="count >= 5"
+>
+    Max number is 5
+</div>
+<button 
+    type="button" 
+    role="button" 
+    v-click="addCount()"
+    [disabled]="count >=5 ? true : false"
+    >
+    + Add count
+</button>
+<button
+    class="btn-outline"
+    v-click="resetCount()"
+    [disabled]="count == 0 ? true : false"
+>
+    Reset
+</button>
 
 <style>
 /* This style is applied to THIS page only (src/view/index.html) */
@@ -14,6 +34,9 @@ body{
     font-family: Arial, Helvetica, sans-serif;
     padding: 10px;
     text-align: center;
+}
+:root{
+    --disabled: #d8d8d8;
 }
 .m15{
     margin-top: 20vh;
@@ -27,25 +50,52 @@ p{
     line-height: 1.95;
 }
 code{
-    font-size: .9rem !important;
+    font-size: .85rem !important;
     background-color: #f4f4f4;
     padding: 3px 5px;
     border-radius: .2rem;
     font-family: 'Courier New', Courier, monospace;
 }
 button{
+    margin-top: 10px;
     background-color: #236dff;
-    padding: .65rem 1.12rem;
+    padding: .72rem 1.15rem;
     border: none !important;
     color: #fff;
     cursor: pointer;
     border-radius: .275rem;
     letter-spacing: .5px;
+    margin: 3px;
 }
 button:hover{
     opacity: .85;
 }
 button:active{
     opacity: 1;
+}
+button:disabled,
+button[disabled]{
+    cursor: not-allowed !important;
+    background-color: var(--disabled);
+}
+.btn-outline{
+    background-color: #fff !important;
+    border: 1px solid #236dff !important;
+    color: #236dff !important;
+}
+.btn-outline:active{
+    outline: 1px solid #236dff !important;
+    font-weight: 600;
+}
+.btn-outline:disabled,
+.btn-outline[disabled]{
+    cursor: not-allowed !important;
+    background-color: var(--disabled) !important;
+    border: none !important;
+    color: #fff !important;
+}
+.error{
+    color: red;
+    font-weight: 600;
 }
 </style>
